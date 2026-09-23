@@ -249,8 +249,8 @@ h1,h2,h3,p{margin:0}
   content:"";position:absolute;left:var(--gutter);right:var(--gutter);top:0;
   aspect-ratio:322/84;pointer-events:none;opacity:0;mix-blend-mode:screen;
   background:linear-gradient(112deg,#0000 32%,#fff6dee6 47%,#ffe8b473 53%,#0000 68%) 135% 0/260% 100% no-repeat;
-  -webkit-mask:url(assets/logo.svg) center/contain no-repeat;
-          mask:url(assets/logo.svg) center/contain no-repeat;
+  -webkit-mask:url(assets/logo.svg?v=2) center/contain no-repeat;
+          mask:url(assets/logo.svg?v=2) center/contain no-repeat;
   animation:brand-sheen-loop 9s var(--ease-lux) 2.6s infinite;
 }
 
