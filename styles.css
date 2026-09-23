@@ -162,17 +162,28 @@ h1,h2,h3,p{margin:0}
   font-family:var(--font-display);font-size:1.2rem;letter-spacing:.32em;font-weight:400;
   padding-left:.1em;
 }
-.nav__links{display:flex;gap:clamp(1rem,2vw,2.2rem)}
-.nav__links a{
+.nav__links{display:flex;gap:clamp(1rem,2vw,2.2rem);position:relative}
+.nav__link{
   font-size:var(--fs-label);letter-spacing:.16em;color:var(--sand-muted);
-  padding:.5rem 0;position:relative;transition:color .3s var(--ease-out);
+  padding:.5rem 0 .85rem;position:relative;transition:color .3s var(--ease-out);
 }
-.nav__links a::after{
-  content:"";position:absolute;left:0;bottom:.2rem;height:1px;width:0;background:var(--gold);
-  transition:width .4s var(--ease-out);
+.nav__link::after{
+  content:"";position:absolute;left:0;right:0;bottom:.55rem;height:1px;
+  background:var(--gold-line);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease-out);
 }
-.nav__links a:hover{color:var(--sand)}
-.nav__links a:hover::after{width:100%}
+.nav__link:hover,.nav__link.is-active{color:var(--sand)}
+.nav__link:not(.is-active):hover::after{transform:scaleX(1)}
+
+/* золотая точка, переезжающая к активному разделу */
+.nav__active{
+  position:absolute;bottom:.15rem;left:0;width:4px;height:4px;margin-left:-2px;
+  border-radius:50%;background:var(--gold);box-shadow:0 0 .5rem var(--gold-line);
+  opacity:0;transform:translate3d(0,0,0);
+  transition:transform .7s var(--ease-out),opacity .5s var(--ease-out);
+  pointer-events:none;
+}
+.nav__active.is-on{opacity:1}
 .nav__actions{display:flex;align-items:center;gap:1rem}
 
 .nav__burger{
@@ -196,6 +207,9 @@ h1,h2,h3,p{margin:0}
   padding:.5rem 0;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:1rem;
 }
 .mobile-menu__nav i{font-style:normal;font-family:var(--font-sans);font-size:.7rem;color:var(--gold);letter-spacing:.2em}
+.mobile-menu__nav a{color:var(--sand-muted);transition:color .3s var(--ease-out)}
+.mobile-menu__nav a.is-active{color:var(--sand)}
+.mobile-menu__nav a.is-active i{color:var(--gold-bright)}
 .mobile-menu__foot{color:var(--sand-muted);font-size:var(--fs-small)}
 .mobile-menu__foot a{font-size:1.15rem;color:var(--gold);display:block;margin-bottom:.5rem}
 

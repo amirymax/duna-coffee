@@ -250,4 +250,63 @@ if (finePointer && !reduce) {
   window.addEventListener('blur',          () => root.classList.add('cursor--hidden'));
 }
 
+
+/* ── 9. АКТИВНЫЙ РАЗДЕЛ В НАВИГАЦИИ ──────────────────────── */
+/* Наблюдатель следит за узкой полосой в середине экрана
+   (rootMargin -40% / -59% — как в референсе), точка переезжает
+   к активному пункту за .7s на той же кривой.                */
+const navLinks = $$('.nav__link');
+const mobLinks = $$('.mobile-menu__nav a');
+const dot      = $('.nav__active');
+const sections = $$('[data-nav]');
+
+if (sections.length && navLinks.length) {
+  let current = '';
+
+  const moveDot = link => {
+    if (!dot) return;
+    if (!link) { dot.classList.remove('is-on'); return; }
+    const x = link.offsetLeft + link.offsetWidth / 2;
+    dot.style.transform = `translate3d(${x}px,0,0)`;
+    dot.classList.add('is-on');
+  };
+
+  const setActive = name => {
+    if (name === current) return;
+    current = name;
+    const mark = (el, on) => {
+      el.classList.toggle('is-active', on);
+      on ? el.setAttribute('aria-current', 'true') : el.removeAttribute('aria-current');
+    };
+    let active = null;
+    navLinks.forEach(a => {
+      const on = a.getAttribute('href') === `#${name}`;
+      mark(a, on);
+      if (on) active = a;
+    });
+    mobLinks.forEach(a => mark(a, a.getAttribute('href') === `#${name}`));
+    moveDot(active);              // в шапке нет пункта для hero — точка гаснет
+  };
+
+  /* активна секция, пересекающая линию на 45% высоты экрана —
+     тот же ориентир, что у полосы -40%/-59% в референсе,
+     но без пропусков при быстрых перескоках                */
+  const syncNav = () => {
+    const line = window.innerHeight * 0.45;
+    let name = sections[0].dataset.nav;
+    for (const sec of sections) {
+      const r = sec.getBoundingClientRect();
+      if (r.top <= line) name = sec.dataset.nav;
+    }
+    setActive(name);
+  };
+
+  lenis ? lenis.on('scroll', syncNav) : window.addEventListener('scroll', syncNav, { passive:true });
+  window.addEventListener('resize', () => {
+    moveDot(navLinks.find(a => a.classList.contains('is-active')));
+    syncNav();
+  });
+  syncNav();
+}
+
 })();

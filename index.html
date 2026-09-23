@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Inter+Tight:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=9">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230f0c09'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='%23cdab74' font-family='Georgia,serif'>D</text></svg>">
 </head>
 <body>
@@ -32,12 +32,13 @@
     </a>
 
     <nav class="nav__links" aria-label="Основная навигация">
-      <a href="#about">О НАС</a>
-      <a href="#menu">МЕНЮ</a>
-      <a href="#gallery">ГАЛЕРЕЯ</a>
-      <a href="#desserts">ДЕСЕРТЫ</a>
-      <a href="#reviews">ОТЗЫВЫ</a>
-      <a href="#location">КОНТАКТЫ</a>
+      <a class="nav__link" href="#about">О НАС</a>
+      <a class="nav__link" href="#menu">МЕНЮ</a>
+      <a class="nav__link" href="#desserts">ДЕСЕРТЫ</a>
+      <a class="nav__link" href="#gallery">ГАЛЕРЕЯ</a>
+      <a class="nav__link" href="#reviews">ОТЗЫВЫ</a>
+      <a class="nav__link" href="#location">КОНТАКТЫ</a>
+      <span class="nav__active" aria-hidden="true"></span>
     </nav>
 
     <div class="nav__actions">
@@ -56,8 +57,8 @@
   <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
     <a href="#about"><i>01</i> О нас</a>
     <a href="#menu"><i>02</i> Меню</a>
-    <a href="#gallery"><i>03</i> Галерея</a>
-    <a href="#desserts"><i>04</i> Десерты</a>
+    <a href="#desserts"><i>03</i> Десерты</a>
+    <a href="#gallery"><i>04</i> Галерея</a>
     <a href="#reviews"><i>05</i> Отзывы</a>
     <a href="#location"><i>06</i> Контакты</a>
   </nav>
@@ -70,7 +71,7 @@
 <main id="main">
 
 <!-- ══ HERO ══ -->
-<section class="hero" id="hero">
+<section class="hero" id="hero" data-nav="hero">
   <div class="hero__media">
     <img src="assets/photos/duna-05.jpg" alt="Зал кофейни Дюна: волнистые стены песочного цвета и мягкая подсветка" fetchpriority="high" width="1600" height="1200">
     <div class="hero__veil"></div>
@@ -100,7 +101,7 @@
 </section>
 
 <!-- ══ 01 · ABOUT ══ -->
-<section class="section about" id="about">
+<section class="section about" id="about" data-nav="about">
   <div class="shell">
     <p class="sect-tag reveal"><i>01</i> О КОФЕЙНЕ</p>
 
@@ -145,7 +146,7 @@
 </div>
 
 <!-- ══ 02 · MENU ══ -->
-<section class="section menu" id="menu">
+<section class="section menu" id="menu" data-nav="menu">
   <div class="shell">
     <p class="sect-tag reveal"><i>02</i> МЕНЮ</p>
 
@@ -218,7 +219,7 @@
 </section>
 
 <!-- ══ 03 · DESSERTS ══ -->
-<section class="section desserts" id="desserts">
+<section class="section desserts" id="desserts" data-nav="desserts">
   <div class="desserts__bg" aria-hidden="true">
     <img src="assets/photos/duna-04.jpg" alt="" loading="lazy">
   </div>
@@ -240,7 +241,7 @@
 </section>
 
 <!-- ══ 04 · GALLERY ══ -->
-<section class="section gallery" id="gallery">
+<section class="section gallery" id="gallery" data-nav="gallery">
   <div class="shell">
     <p class="sect-tag reveal"><i>04</i> ГАЛЕРЕЯ</p>
     <div class="gallery__head">
@@ -262,7 +263,7 @@
 </section>
 
 <!-- ══ 05 · REVIEWS ══ -->
-<section class="section reviews" id="reviews">
+<section class="section reviews" id="reviews" data-nav="reviews">
   <div class="shell">
     <p class="sect-tag reveal"><i>05</i> ОТЗЫВЫ ГОСТЕЙ</p>
 
@@ -298,7 +299,7 @@
 </section>
 
 <!-- ══ 06 · LOCATION ══ -->
-<section class="section location" id="location">
+<section class="section location" id="location" data-nav="location">
   <div class="shell">
     <p class="sect-tag reveal"><i>06</i> КАК НАС НАЙТИ</p>
 
@@ -352,8 +353,8 @@
       <p>Кофейня · кондитерская<br>Краснодар</p>
     </div>
     <nav class="footer__nav" aria-label="Навигация в подвале">
-      <a href="#about">О нас</a><a href="#menu">Меню</a><a href="#gallery">Галерея</a>
-      <a href="#reviews">Отзывы</a><a href="#location">Контакты</a>
+      <a href="#about">О нас</a><a href="#menu">Меню</a><a href="#desserts">Десерты</a>
+      <a href="#gallery">Галерея</a><a href="#reviews">Отзывы</a><a href="#location">Контакты</a>
     </nav>
     <div class="footer__meta">
       <p>ул. имени Героя Пешкова, 14, корп. 3</p>
@@ -419,7 +420,7 @@
 </div>
 
 <script src="assets/vendor/lenis.min.js"></script>
-<script src="script.js?v=6"></script>
-<script src="motion.js?v=6"></script>
+<script src="script.js?v=9"></script>
+<script src="motion.js?v=9"></script>
 </body>
 </html>
