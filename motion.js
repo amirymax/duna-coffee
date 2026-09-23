@@ -120,15 +120,7 @@ $$('.gtile').forEach(f => wrapImage(f));
 const dbg = $('.desserts__bg img');
 if (dbg && !reduce) { dbg.classList.add('parallax-layer'); PARALLAX.push({ el: dbg, range: 5 }); }
 
-/* ── 5. БЛИК ПО ЛОГОТИПУ (brand-sheen-loop 9s) ───────────── */
-const word = $('.hero__wordmark span');
-if (word && !reduce) {
-  const sheen = document.createElement('span');
-  sheen.className = 'sheen';
-  sheen.setAttribute('aria-hidden', 'true');
-  sheen.textContent = word.textContent;
-  word.appendChild(sheen);
-}
+/* Блик по логотипу — на CSS (brand-sheen-loop, маска из assets/logo.svg) */
 
 /* ── 6. ТРИГГЕРЫ ПОЯВЛЕНИЯ ───────────────────────────────── */
 /* пороги как в референсе: fade-up .2 · строки .35 · eyebrow .6 */

@@ -155,13 +155,10 @@ h1,h2,h3,p{margin:0}
   max-width:var(--max-width);margin-inline:auto;padding-inline:var(--gutter);
   width:100%;display:flex;align-items:center;justify-content:space-between;gap:2rem;
 }
-.nav__brand{display:flex;align-items:center;gap:.7rem}
-.nav__mark{color:var(--gold);width:34px;display:block}
-.nav__mark svg{width:100%;height:auto}
-.nav__word{
-  font-family:var(--font-display);font-size:1.2rem;letter-spacing:.32em;font-weight:400;
-  padding-left:.1em;
-}
+.nav__brand{display:flex;align-items:center;color:var(--sand);transition:color .35s var(--ease-out)}
+.nav__brand:hover{color:var(--gold)}
+.logo{display:block;width:100%;height:auto}
+.nav__brand .logo{width:clamp(88px,8vw,116px)}
 .nav__links{display:flex;gap:clamp(1rem,2vw,2.2rem);position:relative}
 .nav__link{
   font-size:var(--fs-label);letter-spacing:.16em;color:var(--sand-muted);
@@ -239,15 +236,30 @@ h1,h2,h3,p{margin:0}
   position:relative;z-index:2;overflow:hidden;
   max-width:var(--max-width);margin:clamp(1.5rem,4vh,3rem) auto 0;padding-inline:var(--gutter);
 }
-.hero__wordmark span{
-  display:block;font-family:var(--font-display);font-weight:300;
-  font-size:var(--fs-mega);line-height:.78;letter-spacing:.02em;
-  background:var(--gold-gradient);-webkit-background-clip:text;background-clip:text;
-  color:transparent;white-space:nowrap;
-  transform:translateY(18%);opacity:0;
+.hero__wordmark{position:relative}
+.hero__wordmark .logo{
+  color:var(--gold);width:100%;
+  transform:translateY(14%);opacity:0;
   animation:wordIn 1.4s var(--ease-lux) .35s forwards;
 }
 @keyframes wordIn{to{transform:translateY(0);opacity:1}}
+
+/* бегущий блик по знаку — маской служит сам логотип */
+.hero__wordmark::after{
+  content:"";position:absolute;left:var(--gutter);right:var(--gutter);top:0;
+  aspect-ratio:322/84;pointer-events:none;opacity:0;mix-blend-mode:screen;
+  background:linear-gradient(112deg,#0000 32%,#fff6dee6 47%,#ffe8b473 53%,#0000 68%) 135% 0/260% 100% no-repeat;
+  -webkit-mask:url(assets/logo.svg) center/contain no-repeat;
+          mask:url(assets/logo.svg) center/contain no-repeat;
+  animation:brand-sheen-loop 9s var(--ease-lux) 2.6s infinite;
+}
+
+.hero__tagline{
+  margin-top:clamp(.75rem,1.6vw,1.25rem);
+  font-size:var(--fs-label);letter-spacing:.42em;color:var(--sand-muted);
+  font-weight:500;text-align:center;
+}
+.hero__tagline i{font-style:normal;color:var(--gold);margin-inline:.35em}
 
 .hero__stats{
   position:relative;z-index:2;max-width:var(--max-width);margin-inline:auto;width:100%;
@@ -480,10 +492,7 @@ h1,h2,h3,p{margin:0}
 /* ── FOOTER ────────────────────────────── */
 .footer{background:var(--ink-950);padding-block:clamp(3rem,5vw,4.5rem);border-top:1px solid var(--line)}
 .footer__inner{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;align-items:start}
-.footer__word{
-  font-family:var(--font-display);font-size:2rem;letter-spacing:.3em;display:block;margin-bottom:.9rem;
-  background:var(--gold-gradient);-webkit-background-clip:text;background-clip:text;color:transparent;
-}
+.footer__brand .logo{width:150px;color:var(--gold);margin-bottom:1.1rem}
 .footer__brand p,.footer__meta p{font-size:var(--fs-small);color:var(--sand-muted);font-weight:300;line-height:1.7}
 .footer__nav{display:flex;flex-direction:column;gap:.55rem}
 .footer__nav a{font-size:var(--fs-small);color:var(--sand-muted);transition:color .3s}
@@ -676,13 +685,6 @@ h1,h2,h3,p{margin:0}
   3%,13%{opacity:1}
   17%,to{opacity:0;background-position:-35% 0}
 }
-.hero__wordmark span{position:relative}
-.hero__wordmark .sheen{
-  position:absolute;inset:0;pointer-events:none;opacity:0;mix-blend-mode:screen;
-  background:linear-gradient(112deg,#0000 32%,#fff6dee6 47%,#ffe8b473 53%,#0000 68%) 135% 0/260% 100% no-repeat;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:brand-sheen-loop 9s var(--ease-lux) 2.6s infinite;
-}
 
 /* кастомный курсор */
 html.has-custom-cursor,html.has-custom-cursor *{cursor:none!important}
@@ -763,7 +765,8 @@ html.lenis,html.lenis body{height:auto}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
-  .hero__wordmark span{opacity:1;transform:none}
+  .hero__wordmark .logo{opacity:1;transform:none}
+  .hero__wordmark::after{display:none}
   .marquee__track,.grain{animation:none}
   .reveal-lines__inner{transform:none}
   .image-reveal__mask{clip-path:none}
