@@ -21,15 +21,16 @@ const lockScroll = on => {
 
 /* ══ ДАННЫЕ: ФОТО ══════════════════════════ */
 /* preview — попадает в короткую секцию на странице (8 шт) */
+/* Площадь превью-плиток — 12 ячеек: без дыр и при 4, и при 3, и при 2 колонках */
 const PHOTOS = [
   { f:'duna-05.jpg', cat:'interior', alt:'Зал с волнистыми стенами и мягкой подсветкой',    span:'w2 h2', preview:1 },
   { f:'duna-26.jpg', cat:'drinks',   alt:'Капучино с плотной молочной пенкой',                            preview:1 },
+  { f:'duna-24.jpg', cat:'food',     alt:'Лимонный тарт с меренгой и чашка кофе',                         preview:1 },
   { f:'duna-01.jpg', cat:'interior', alt:'Барная стойка и столики в зале',                                preview:1 },
   { f:'duna-08.jpg', cat:'food',     alt:'Меренговый рулет с ягодами',                                    preview:1 },
-  { f:'duna-30.jpg', cat:'interior', alt:'Кофейная зона с тёплыми лампами',                 span:'h2',    preview:1 },
   { f:'duna-03.jpg', cat:'drinks',   alt:'Латте с рисунком на пенке',                                     preview:1 },
   { f:'duna-27.jpg', cat:'interior', alt:'Вид на бар и витрину с десертами',                span:'w2',    preview:1 },
-  { f:'duna-24.jpg', cat:'food',     alt:'Лимонный тарт с меренгой и чашка кофе',                         preview:1 },
+  { f:'duna-30.jpg', cat:'interior', alt:'Кофейная зона с тёплыми лампами',                               preview:1 },
 
   { f:'duna-07.jpg', cat:'drinks',   alt:'Стакан кофе с собой с логотипом Дюна' },
   { f:'duna-25.jpg', cat:'interior', alt:'Светлый зал с нишами в стене и мягкими диванами' },

@@ -420,6 +420,7 @@ h1,h2,h3,p{margin:0}
 .gallery__grid{
   display:grid;grid-template-columns:repeat(4,1fr);
   grid-auto-rows:clamp(150px,15vw,230px);gap:clamp(.5rem,1vw,.9rem);
+  grid-auto-flow:row dense;          /* плитки подтягиваются в пустоты */
   margin-bottom:2rem;
 }
 .gtile{
@@ -588,6 +589,7 @@ h1,h2,h3,p{margin:0}
 .modal__grid{
   display:grid;grid-template-columns:repeat(4,1fr);
   grid-auto-rows:clamp(150px,14vw,215px);gap:clamp(.5rem,1vw,.9rem);
+  grid-auto-flow:row dense;
 }
 .modal__reviews{columns:3;column-gap:clamp(1rem,2vw,1.6rem)}
 .modal__reviews .rcard{margin-bottom:clamp(1rem,2vw,1.6rem);height:auto;display:block}
@@ -770,6 +772,7 @@ html.lenis,html.lenis body{height:auto}
   .about__fig img,.about__fig--tall img{height:clamp(230px,52vw,380px)}
   .price-list{columns:1}
   .gallery__grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(130px,28vw,190px)}
+  .gtile--h2{grid-row:span 1}
   .reviews__grid{grid-template-columns:1fr}
   .footer__inner{grid-template-columns:1fr;gap:2rem}
   .desserts__media figure:first-child{grid-column:auto}
