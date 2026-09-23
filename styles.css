@@ -191,23 +191,47 @@ h1,h2,h3,p{margin:0}
 .nav__burger[aria-expanded="true"] span:first-child{transform:translateY(3.5px) rotate(45deg)}
 .nav__burger[aria-expanded="true"] span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
 
+/* меню раскрывается кругом из-под кнопки и так же схлопывается:
+   clip-path circle(0% → 150% at 100% 0%), .85s, ease-in-out
+   пункты выезжают с задержкой .28 + n*.05                     */
 .mobile-menu{
   position:fixed;inset:0;z-index:var(--z-menu);background:var(--ink-950);
   padding:calc(var(--nav-height) + 2rem) var(--gutter) 2rem;
   display:flex;flex-direction:column;justify-content:space-between;
-  animation:menuIn .45s var(--ease-out);
+  clip-path:circle(0% at 100% 0%);
+  transition:clip-path .85s cubic-bezier(.65,0,.35,1);
 }
-@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.mobile-menu.is-open{clip-path:circle(150% at 100% 0%)}
 .mobile-menu__nav{display:flex;flex-direction:column;gap:.25rem}
 .mobile-menu__nav a{
   font-family:var(--font-display);font-size:clamp(2rem,9vw,3rem);font-weight:300;
   padding:.5rem 0;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:1rem;
+  opacity:0;transform:translateY(28px);
 }
+.mobile-menu.is-open .mobile-menu__nav a,
+.mobile-menu.is-closing .mobile-menu__nav a{opacity:1;transform:none}
+.mobile-menu.is-open .mobile-menu__nav a{
+  transition:opacity .9s var(--ease-out) var(--d),transform .9s var(--ease-out) var(--d);
+}
+.mobile-menu__nav a:nth-child(1){--d:.28s}
+.mobile-menu__nav a:nth-child(2){--d:.33s}
+.mobile-menu__nav a:nth-child(3){--d:.38s}
+.mobile-menu__nav a:nth-child(4){--d:.43s}
+.mobile-menu__nav a:nth-child(5){--d:.48s}
+.mobile-menu__nav a:nth-child(6){--d:.53s}
 .mobile-menu__nav i{font-style:normal;font-family:var(--font-sans);font-size:.7rem;color:var(--gold);letter-spacing:.2em}
 .mobile-menu__nav a{color:var(--sand-muted);transition:color .3s var(--ease-out)}
 .mobile-menu__nav a.is-active{color:var(--sand)}
 .mobile-menu__nav a.is-active i{color:var(--gold-bright)}
-.mobile-menu__foot{color:var(--sand-muted);font-size:var(--fs-small)}
+.mobile-menu__foot{
+  color:var(--sand-muted);font-size:var(--fs-small);
+  opacity:0;transform:translateY(20px);
+}
+.mobile-menu.is-open .mobile-menu__foot,
+.mobile-menu.is-closing .mobile-menu__foot{opacity:1;transform:none}
+.mobile-menu.is-open .mobile-menu__foot{
+  transition:opacity .9s var(--ease-out) .6s,transform .9s var(--ease-out) .6s;
+}
 .mobile-menu__foot a{font-size:1.15rem;color:var(--gold);display:block;margin-bottom:.5rem}
 
 /* ══ HERO ══════════════════════════════ */
@@ -768,6 +792,8 @@ html.lenis,html.lenis body{height:auto}
   .hero__wordmark .logo{opacity:1;transform:none}
   .hero__wordmark::after{display:none}
   .marquee__track,.grain{animation:none}
+  .mobile-menu{clip-path:none;transition:none}
+  .mobile-menu__nav a,.mobile-menu__foot{opacity:1;transform:none}
   .reveal-lines__inner{transform:none}
   .image-reveal__mask{clip-path:none}
   .image-reveal__zoom{transform:none}

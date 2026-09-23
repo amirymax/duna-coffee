@@ -270,15 +270,33 @@ onScroll();
 window.addEventListener('scroll', onScroll, { passive:true });
 
 const burger = $('#burger'), mobile = $('#mobile-menu');
+let menuTimer = null, menuOpen = false;
+
 const setMenu = open => {
-  mobile.hidden = !open;
+  if (open === menuOpen) return;
+  menuOpen = open;
+  clearTimeout(menuTimer);
   burger.setAttribute('aria-expanded', String(open));
   burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
   lockScroll(open);
+
+  if (open) {
+    mobile.hidden = false;
+    mobile.classList.remove('is-closing');
+    requestAnimationFrame(() => mobile.classList.add('is-open'));
+  } else {
+    /* пункты остаются на месте, пока круг схлопывается */
+    mobile.classList.remove('is-open');
+    mobile.classList.add('is-closing');
+    menuTimer = setTimeout(() => {
+      mobile.hidden = true;
+      mobile.classList.remove('is-closing');
+    }, 850);
+  }
 };
-burger.addEventListener('click', () => setMenu(mobile.hidden));
+burger.addEventListener('click', () => setMenu(!menuOpen));
 $$('a', mobile).forEach(a => a.addEventListener('click', () => setMenu(false)));
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && !mobile.hidden) setMenu(false); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) setMenu(false); });
 
 /* Появление, счётчики, параллакс, курсор и smooth scroll — в motion.js */
 
