@@ -5,5 +5,5 @@
     <path d="M216 92 V28 L280 92 V28"/>
     <path d="M310 92 V60 A32 32 0 0 1 374 60 V92"/>
   </g>
-  <circle cx="50" cy="60" r="8" fill="currentColor"/>
+  <circle cx="50" cy="60" r="8" fill="currentColor"/><circle cx="342" cy="64" r="8" fill="currentColor"/>
 </svg>
